@@ -30,6 +30,8 @@
     <li><strong>aptitude install vim</strong></li>
     <li>App Armor é um software sutilizado para limitar o acesso dos programas a certos recursos.</li>
     <li>Podemos visualizar o apparmor com <strong>aa-status</strong>.</li>
+    <li>Podemos verificar o hostname da nossa maquina com <strong>hostname</strong></li>
+    <li>O hostname pode ser modificado com <strong>hostnamectl set-hostname "new host name"</strong></li>
 </ul>
 
 <h2>SSH</h2>
@@ -77,4 +79,9 @@
     <ol type="1">
         <li><strong>ufw allow 4242</strong></li>
     </ol>
+    <li>Da mesma forma podemos negar novamente esse porta</li>
+    <ol type="1">
+        <li><strong>ufw deny 4242</strong></li>
+    </ol>
+    <li><strong>ufw status</strong> podemos verificar nossas regras.</li>
 </ul>
