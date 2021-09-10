@@ -43,7 +43,7 @@
     <img src="port.png" alt="">
     <li>Agora computadores na mesma rede podem acessar nossa maquina via SSH</li>
     <li>A conexão é realizada com <strong>ssh user@host -p 4242</strong></li>
-    <ol>
+    <ol type="1">
         <li><strong>ssh</strong> é o comando utilizado para realizar nossa conexão.</li>
         <li><strong>user</strong> sera o usuario que tentaremos acessar na nossa maquina.</li>
         <li><strong>host</strong> sera o ip da nossa maquina</li>
@@ -56,3 +56,25 @@
 <li>Ao executar o codigo de outra maquina (ou mesmo da local) sera pedido a senha do usuario estamos tentando se conectar.</li>
 <img src="co.gif" alt="">
 <li>Agora podemos navegar na nossa maquina remotamente.</li>
+<br>
+<h2>Firewall</h2>
+<ul>
+    <li>Estarei utilizando <a href="https://www.linode.com/docs/guides/configure-firewall-with-ufw/" target="_blank" rel="noopener noreferrer">UFW</a> como firewall.</li>
+    <li>Ele é um firewall front-end descomplicado que nos permite o gerenciamento das regras do firewall.</li>
+    <li>Foi criado para facilitar a configuração de um firewall.</li>
+    <li>Para installar e ativar o ufw:</li>
+    <ol type="1">
+        <li><strong>aptitude install ufw</strong></li>
+        <li><strong>ufw enable</strong> (para iniciar as regras)</li>
+    </ol>
+    <li>Iremos começar negando todas conexões recebidas e permitindo as saidas:</li>
+    <ol type="1">
+        <li><strong>ufw default allow outgoing</strong></li>
+        <li><strong>ufw default deny incoming</strong></li>
+    </ol>
+    <li>Nesse ponto caso tentemos nos conectar via SSH como foi feito anteriormente, a conexão sera negada.</li>
+    <li>Para resolver esse problema podemos permitir a porta na qual o SSH esta rodando (4242)</li>
+    <ol type="1">
+        <li><strong>ufw allow 4242</strong></li>
+    </ol>
+</ul>
