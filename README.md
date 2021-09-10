@@ -41,4 +41,18 @@
     <li>Por padrão ele estara rodando na porta 22</li>
     <li>Estarei mudando a porta no arquivo /etc/ssh/sshd_config com o vim</li>
     <img src="port.png" alt="">
+    <li>Agora computadores na mesma rede podem acessar nossa maquina via SSH</li>
+    <li>A conexão é realizada com <strong>ssh user@host -p 4242</strong></li>
+    <ol>
+        <li><strong>ssh</strong> é o comando utilizado para realizar nossa conexão.</li>
+        <li><strong>user</strong> sera o usuario que tentaremos acessar na nossa maquina.</li>
+        <li><strong>host</strong> sera o ip da nossa maquina</li>
+        <li><strong>-p</strong> é utilizado para indicar a porta onde conexão sera estabelecida, em nosso caso a porta 4242</li>
+    </ol>
 </ul>
+<li>Para ver o ip da nossa maquina usamos <strong>ip -4 address</strong>, sera a numeração na frente do <strong>inet</strong> e atras do <strong>brd</strong></li>
+<img src="ip.png" alt="">
+<li>Logo para se conectar a nossa maquina precisamos do seguinte codigo: <strong>ssh flda-sil@10.0.0.110 -p 4242</strong></li>
+<li>Ao executar o codigo de outra maquina (ou mesmo da local) sera pedido a senha do usuario estamos tentando se conectar.</li>
+<img src="co" alt="">
+<li>Agora podemos navegar na nossa maquina remotamente.</li>
