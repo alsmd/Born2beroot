@@ -19,4 +19,26 @@
     <li>Iremos criar algumas pastas em partições separadas.</li>
     <img src="part.png" alt="">
     <li>Agora basta esperar a instalação.</li>
+    <li>Irei deixar apenas os sofwares padrões e o ssh como programas iniciais.</li>
+    <img src="sof.png" alt="">
+</ul>
+<h2>Configurações</h2>
+<ul>
+    <li>Durante A instalação desse servidor estarei utilizando o gerenciador de pacote aptitude, por se tratar uma aplicação mais simples</li>
+    <li><strong>apt install aptitude</strong></li>
+    <li>Vim como editor de texto.</li>
+    <li><strong>aptitude install vim</strong></li>
+    <li>App Armor é um software sutilizado para limitar o acesso dos programas a certos recursos.</li>
+    <li>Podemos visualizar o apparmor com <strong>aa-status</strong>.</li>
+</ul>
+
+<h2>SSH</h2>
+<ul>
+    <li>O <a href="https://www.weblink.com.br/blog/tecnologia/acesso-ssh-o-que-e/" target="_blank" rel="noopener noreferrer">SSH</a> é um protolo de rede utilizado para acessar, gerenciar e modificar um servidor remotamente. </li>
+    <li>Esse acesso é realizado atraves da rede, onde dados e informações são transmitidos atraves de uma comunicação criptografada.</li>
+    <li>A ferramenta utilizada sera o <a href="https://www.cyberciti.biz/faq/ubuntu-linux-install-openssh-server/" target="_blank" rel="noopener noreferrer"> Open SSH</a></li>
+    <li>Podemos verificar sua execução com o systemctl status ssh</li>
+    <li>Por padrão ele estara rodando na porta 22</li>
+    <li>Estarei mudando a porta no arquivo /etc/ssh/sshd_config com o vim</li>
+    <img src="port.png" alt="">
 </ul>
