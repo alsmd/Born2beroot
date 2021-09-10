@@ -54,5 +54,5 @@
 <img src="ip.png" alt="">
 <li>Logo para se conectar a nossa maquina precisamos do seguinte codigo: <strong>ssh flda-sil@10.0.0.110 -p 4242</strong></li>
 <li>Ao executar o codigo de outra maquina (ou mesmo da local) sera pedido a senha do usuario estamos tentando se conectar.</li>
-<img src="co" alt="">
+<img src="co.gif" alt="">
 <li>Agora podemos navegar na nossa maquina remotamente.</li>
