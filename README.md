@@ -96,12 +96,12 @@
     <li>Essas configurações serão aplicadas apenas para os novos usuarios</li>
     <ul>
         <li>Para ver as configurações de expiração de senha para os usuarios ja criados usamos <strong>chage -l "username"</strong></li>
-        <img src="user_pass" alt="">
+        <img src="user_pass.png" alt="">
         <li>E para modificar os valores:</li>
         <li><strong>chage -M "days" "username"</strong> (Numero maximo de dias uma senha pode ser usada).</li>
         <li><strong>chage -m "days" "username"</strong> (Numero minimo de dias antes de uma senha ser trocada).</li>
         <li><strong>chage -W "days" "username"</strong> (Manda um warning antes da senha expirar).</li>
     </ul>
     <li>Agora iremos modificar o tamanho minimo da senha para 10 characteres, <strong>vim /etc/pam.d/common-password</strong></li>
-    <img src="pass_minlen" alt="">
+    <img src="pass_minlen.png" alt="">
 </ul>
