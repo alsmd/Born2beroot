@@ -68,6 +68,7 @@
     <ol type="1">
         <li><strong>aptitude install ufw</strong></li>
         <li><strong>ufw enable</strong> (para iniciar as regras)</li>
+        <li><strong>systemctl enable ufw</strong> (para iniciar as regras sempre no boot)</li>
     </ol>
     <li>Iremos começar negando todas conexões recebidas e permitindo as saidas:</li>
     <ol type="1">
@@ -84,4 +85,23 @@
         <li><strong>ufw deny 4242</strong></li>
     </ol>
     <li><strong>ufw status</strong> podemos verificar nossas regras.</li>
+</ul>
+
+<h2>Password Policy</h2>
+<ul>
+    <li>Irei modificar algumas da politiacas de segurança.</li>
+    <li>Para as configurações iniciasi estarei modificando o arquivo <strong>/etc/login.defs</strong> com o vim.</li>
+    <li>Estarei deixando a expiração de uma senha para 30 dias, um warning 7 dias antes e a modificação de uma senha tem que ter o intervalo minimo de 2 dias.</li>
+    <img src="pass_ex.png" alt="">
+    <li>Essas configurações serão aplicadas apenas para os novos usuarios</li>
+    <ul>
+        <li>Para ver as configurações de expiração de senha para os usuarios ja criados usamos <strong>chage -l "username"</strong></li>
+        <img src="user_pass" alt="">
+        <li>E para modificar os valores:</li>
+        <li><strong>chage -M "days" "username"</strong> (Numero maximo de dias uma senha pode ser usada).</li>
+        <li><strong>chage -m "days" "username"</strong> (Numero minimo de dias antes de uma senha ser trocada).</li>
+        <li><strong>chage -W "days" "username"</strong> (Manda um warning antes da senha expirar).</li>
+    </ul>
+    <li>Agora iremos modificar o tamanho minimo da senha para 10 characteres, <strong>vim /etc/pam.d/common-password</strong></li>
+    <img src="pass_minlen" alt="">
 </ul>
