@@ -89,8 +89,8 @@
 
 <h2>Password Policy</h2>
 <ul>
-    <li>Irei modificar algumas da politiacas de segurança.</li>
-    <li>Para as configurações iniciasi estarei modificando o arquivo <strong>/etc/login.defs</strong> com o vim.</li>
+    <li>Irei modificar algumas da <a href="https://ostechnix.com/how-to-set-password-policies-in-linux/" target="_blank" rel="noopener noreferrer">politiacas de segurança.</a></li>
+    <li>Para as configurações iniciais estarei modificando o arquivo <strong>/etc/login.defs</strong> com o vim.</li>
     <li>Estarei deixando a expiração de uma senha para 30 dias, um warning 7 dias antes e a modificação de uma senha tem que ter o intervalo minimo de 2 dias.</li>
     <img src="pass_ex.png" alt="">
     <li>Essas configurações serão aplicadas apenas para os novos usuarios</li>
@@ -102,6 +102,9 @@
         <li><strong>chage -m "days" "username"</strong> (Numero minimo de dias antes de uma senha ser trocada).</li>
         <li><strong>chage -W "days" "username"</strong> (Manda um warning antes da senha expirar).</li>
     </ul>
-    <li>Agora iremos modificar o tamanho minimo da senha para 10 characteres, <strong>vim /etc/pam.d/common-password</strong></li>
-    <img src="pass_minlen.png" alt="">
+    <li>Para algumas configurações mais avançadas estarei utilizando o pwquality</li>
+    <li><strong>aptitude install libpam-pwquality</strong></li>
+    <li>Agora podemos adicionar <a href="https://manpages.debian.org/unstable/libpwquality-common/pwquality.conf.5.en.html" target="_blank" rel="noopener noreferrer">regras</a> mais avançadas no arquivo <strong>etc/pam.d/common-password</strong> </li>
+    <li>Setarei um tamanho minimo de 10 characters, minimo de 1 letra maiuscula e 1 digito, maximo de 3 repetições do mesmo character, alem das configurações padrões do pwquality.</li>
+    <img src="pass_rule.png" alt="">
 </ul>
