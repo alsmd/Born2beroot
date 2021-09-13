@@ -126,4 +126,11 @@
         <li>Tambem colocarei uma mensagem costumizada caso o usuario errea senha.</li>
         <img src="su_con.png" alt="">
     </ol>
+    <li>Como citado anteriormente os logs do sudo estão presentes no <strong>/var/log/auth.log</strong>, mas esse arquivo tambem possui o logs de varias outras aplicações, logo é uma boa pratica ter um arquivo separado para o sudo.</li>
+    <li>Para realizar tal ação, primeiro precisaremos adicionar a seguinte linha no arquivo <strong>/etc/sudoers</strong>:</li>
+    <img src="su_log.png" alt="">
+    <li>Depois precisaremos modificar o arquivo <strong>/etc/rsyslog.conf</strong> adicionando a seguinte linha:</li>
+    <img src="su_pa.png" alt="">
+    <li>Agora reiniciaremos o serviço rsyslog, <strong>sudo systemctl restart rsyslog</strong></li>
+    <li>Agora os logs relacionados ao sudo ficarão armazenados no arquivo <strong>/var/log/sudo.log</strong></li>
 </ul>
