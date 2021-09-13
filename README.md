@@ -108,3 +108,22 @@
     <li>Setarei um tamanho minimo de 10 characters, minimo de 1 letra maiuscula e 1 digito, maximo de 3 repetições do mesmo character, alem das configurações padrões do pwquality.</li>
     <img src="pass_rule.png" alt="">
 </ul>
+
+<h2>Sudo</h2>
+<ul>
+    <li>O sistema bloqueia certos locais e ações por razões de segurança, o unico que pode acessar essas areas é o root user.</li>
+    <li>Não é uma boa pratica utilizar o sistema sempre logado na conta root, pois podemos executar alguma ação não intencionada que pode dafinifcar o sistema.</li>
+    <li>Para resolver essas questões surgiu o <a href="https://phoenixnap.com/kb/linux-sudo-command" target="_blank" rel="noopener noreferrer">sudo</a> que nos permitira acesso temporario ao direitos de administrador mesmo não estnado logado na conta root.</li>
+    <li><strong>aptitude install sudo</strong></li>
+    <li>Podemos verifica no arquivo <strong>/etc/sudoers</strong> que os usuarios que estiverem dentro do grupo <strong>sudo</strong> podera executar ações de administrador.</li>
+    <img src="su.png" alt="">
+    <li>Para adicionar um usuario para esse grupo basta usar <strong>usermod -aG sudo "username"</strong>.</li>
+    <li>Podemos acompanhar os comandos que os usuarios executaram com o sudo com <strong>grep sudo /var/log/auth.log</strong></li>
+    <li>Estarei adicionando algumas configurações sobre o sudo</li>
+    <ol type="1">
+        <li><a href="https://www.tecmint.com/sudoers-configurations-for-setting-sudo-in-linux/" target="_blank" rel="noopener noreferrer">Configurações</a> podem ser adicionados no arquivo <strong>/etc/sudoers</strong></li>
+        <li>Estarei modificando o numero maximo de tentativa ao errar a senha para executar um comando sudo.</li>
+        <li>Tambem colocarei uma mensagem costumizada caso o usuario errea senha.</li>
+        <img src="su_con.png" alt="">
+    </ol>
+</ul>
