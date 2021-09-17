@@ -210,4 +210,6 @@
     </ul>
     <li>Agora quando acessarmos o ip da nossa maquina no navegador conseguiremos nos conectar ao wordpress</li>
     <img src="wordpress.png" alt="">
+    <li>Agora basta conectar o database ao wordpress e nosso site estara pronto:</li>
+    <img src="conf_data.png" alt="">
 </ul>
