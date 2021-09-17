@@ -112,18 +112,18 @@
 <h2>Sudo</h2>
 <ul>
     <li>O sistema bloqueia certos locais e ações por razões de segurança, o unico que pode acessar essas areas é o root user.</li>
-    <li>Não é uma boa pratica utilizar o sistema sempre logado na conta root, pois podemos executar alguma ação não intencionada que pode dafinifcar o sistema.</li>
-    <li>Para resolver essas questões surgiu o <a href="https://phoenixnap.com/kb/linux-sudo-command" target="_blank" rel="noopener noreferrer">sudo</a> que nos permitira acesso temporario ao direitos de administrador mesmo não estnado logado na conta root.</li>
+    <li>Não é uma boa pratica utilizar o sistema sempre logado na conta root, pois podemos executar alguma ação não intencionada que pode dafinificar o sistema.</li>
+    <li>Para resolver essas questões surgiu o <a href="https://phoenixnap.com/kb/linux-sudo-command" target="_blank" rel="noopener noreferrer">sudo</a> que nos permitira acesso temporario ao direitos de administrador mesmo não estando logado na conta root.</li>
     <li><strong>aptitude install sudo</strong></li>
-    <li>Podemos verifica no arquivo <strong>/etc/sudoers</strong> que os usuarios que estiverem dentro do grupo <strong>sudo</strong> podera executar ações de administrador.</li>
+    <li>Podemos verificar no arquivo <strong>/etc/sudoers</strong> que os usuarios que estiverem dentro do grupo <strong>sudo</strong> podera executar ações de administrador.</li>
     <img src="su.png" alt="">
     <li>Para adicionar um usuario para esse grupo basta usar <strong>usermod -aG sudo "username"</strong>.</li>
     <li>Podemos acompanhar os comandos que os usuarios executaram com o sudo com <strong>grep sudo /var/log/auth.log</strong></li>
     <li>Estarei adicionando algumas configurações sobre o sudo</li>
     <ol type="1">
         <li><a href="https://www.tecmint.com/sudoers-configurations-for-setting-sudo-in-linux/" target="_blank" rel="noopener noreferrer">Configurações</a> podem ser adicionados no arquivo <strong>/etc/sudoers</strong></li>
-        <li>Estarei modificando o numero maximo de tentativa ao errar a senha para executar um comando sudo.</li>
-        <li>Tambem colocarei uma mensagem costumizada caso o usuario errea senha.</li>
+        <li>Estarei modificando o numero maximo de tentativa ao errar a senha para executar um comando com sudo.</li>
+        <li>Tambem colocarei uma mensagem costumizada caso o usuario erre a senha.</li>
         <img src="su_con.png" alt="">
     </ol>
     <li>Como citado anteriormente os logs do sudo estão presentes no <strong>/var/log/auth.log</strong>, mas esse arquivo tambem possui o logs de varias outras aplicações, logo é uma boa pratica ter um arquivo separado para o sudo.</li>
@@ -133,4 +133,81 @@
     <img src="su_pa.png" alt="">
     <li>Agora reiniciaremos o serviço rsyslog, <strong>sudo systemctl restart rsyslog</strong></li>
     <li>Agora os logs relacionados ao sudo ficarão armazenados no arquivo <strong>/var/log/sudo.log</strong></li>
+    <li>Por razões de segurança tambem esterei fazendo com que o sudo so possa ser usado com uma tty real, ou seja não pode ser executado por um cron por exemplo.</li>
+    <li><strong>Defaults requiretty</strong> no <strong>/etc/sudoers</strong></li>
+</ul>
+
+<h2>Wordpress</h2>
+<ul>
+    <li>Agora é gora de montar nosso primeiro serviço do nosso servidor.</li>
+    <li>Primeiro vamos installar o MariaDB como nosso banco de dados.</li>
+    <li><strong>aptitude install mariadb-server mariadb-client</strong></li>
+    <li>Podemos chegar se foi instalado com sucesso com o comando <strong>mysql</strong></li>
+    <li>Agora precisaremos instalar o lighttpd</li>
+    <li><strong>aptitude install <a href="https://www.rosehosting.com/blog/how-to-install-lighttpd-on-debian-9/" target="_blank" rel="noopener noreferrer">lighttpd</a></strong></li>
+    <li>Podemos checar se esta rodando com <strong>systemctl status lighttpd</strong></li>
+    <li>Podemos verifica suas configurações em <strong>/etc/lighttpd/lighttpd.conf</strong> e <strong>/etc/lighttpd/conf-available/</strong></li>
+    <li>Agora caso coloquemos o ip da nossa maquina no browser uma pagina inicial sera mostrada</li>
+    <li>O arquivo inicial do lighttpd esta localizado em <strong>/var/ww/html/</strong></li>
+    <img src="p.png" alt="">
+    <li>Agora iremos instalar o php para trabalhar junto com lighttpd</li>
+    <li>Para installar o php assim como as extenções necessarias utilizamos <strong>aptitude install php php-cli php-common php-fpm php-mysql
+    </strong></li>
+    <li>Agora precisamos modificar o php.ini para habilitar o suporte do php pro lighttpd</li>
+    <li><strong>vim /etc/php/"version"/fpm/php.ini</strong></li>
+    <li>Primeiro iremos descomentar o comando <strong>cgi.fix_pathinfo=1</strong></li>
+    <li>Por padrão o php-fpm escuta no socket /var/run/php7-fpm.sock, para mudar essa configuração padrão iremos alterar o arquivo /etc/php/"version"/fpm/pool.d/www.conf</li>
+    <li>Na linha <strong>listen = /run/php/php7.0-fpm.sock</strong> iremos substituir por <strong>listen = 127.0.0.1:9000</strong></li>
+    <li>Agora iremos habilitar o FastCgi modificando o arquivo <strong>/etc/lighttpd/conf-available/15-fastcgi-php.conf</strong></li>
+    <li>nas linhas: <br><strong>"bin-path" => "/usr/bin/php-cgi<br>
+        "socket" => "/var/run/lighttpd/php.socket"</strong></li>
+    <li>Colocaremos: <br><strong>"host" => "127.0.0.1", <br>
+        "port" => "9000",
+       </strong></li>
+    <li>Agora basta habilitar o FastCgi e FastCgi-php com:</li>
+    <li><strong>lighty-enable-mod fastcgi</strong></li>
+    <li><strong>lighty-enable-mod fastcgi-php</strong></li>
+    <li>Agora iremos reiniciar os serviços:</li>
+    <li>systemctl restart php7.0-fpm </li>
+    <li>systemctl restart lighttpd</li>
+    <li>Agora podemos testar subindo nosso primeiro site: <strong>(SEGUINTES PASSOS SÃO IRRELEVANTES PARA O PROJETO, JA QUE O VIRTUAL HOST SO SERIA ACESSIVEL DENTRO DA MAQUINA)</strong></li>
+    <ul>
+        <li>mkdir /var/www/html/testsite</li>
+        <li>Agora criamos uma configuração para o nosso virtual host: <strong>vim /etc/lighttpd/conf-available/test.conf</strong></li>
+        <li>Dentro dele colamos:</li>
+        <li><strong>$HTTP["host"] =="test.example.com" {</strong></li>
+        <li><strong>server.document-root = "/var/www/html/testsite"</strong></li>
+        <li><strong>index-file.names = ( "index.php" )</strong></li>
+        <li><strong>}</strong></li>
+        <li>Agora ciramos um <strong>index.php</strong> dentro da pasta que criamos, essa sera nossa pagina inicial</li>
+        <li>Dentro dela fiz um Hello World para testar</li>
+        <img src="hello.png" alt="">
+        <li>Agora podemos habilitar nosso virtual host com:</li>
+        <li><strong>ln -s /etc/lighttpd/conf-available/test.conf /etc/lighttpd/conf-enabled/</strong></li>
+        <li>Agora setamos as permisões apropriadas para a pasta do nosso site:</li>
+        <li><strong>chown -R www-data:www-data /var/www/html/testsite</strong></li>
+        <li>Finalmente reiniciamos nosso serviço: <strong>systemctl restart lighttpd</strong></li>
+        <li>Agora caso tentemos acessar o host que configuramos (test.example.com) iremos ver o conteudo do nosso index.php</li>
+    </ul>
+    <li>Agora podemos criar nosso database para o nosso wordpress</li>
+    <ul>
+        <li><strong>mysql</strong></li>
+        <li><strong>CREATE DATABASE wordpress;</strong></li>
+        <li><strong>CREATE USER 'flda-sil'@'localhost' IDENTIFIED BY '123'</strong></li>
+        <li><strong>GRANT ALL ON wordpress.* TO 'flda-sil'@'localhost';</strong></li>
+        <li><strong>FLUSH PRIVILEGES</strong></li>
+    </ul>
+    <li>Com o database criado podemos ir na pasta <strong>/var/www/html/</strong> para setar nosso wordpress</li>
+    <ul>
+        <li>Primeiro apagaremos todos os arquivos da pasta: <strong>rm -fr /var/www/html/</strong></li>
+        <li>Agora dentro da nossa pasta de downloads iremos baixar o wordpress: <strong>wget http://wordpress.org/latest.tar.gz</strong></li>
+        <li>Podemos extrair seu conteudo com: <strong>tar xpf latest.tar.gz</strong></li>
+        <li>Agora copiados todo conteudo da pasta <strong>wordpress</strong> que foi oque extraimos e colamos em <strong>/var/www/html</strong></li>
+        <li><strong>sudo cp -r wordpress /var/www/html/</strong></li>
+        <li>Agora setamos as permisões da pasta do nosso site:</li>
+        <li><strong>sudo chown -R www-data:www-data /var/www/html</strong></li>
+        <li><strong>sudo chmod -R 777 /var/www/html</strong></li>
+    </ul>
+    <li>Agora quando acessarmos o ip da nossa maquina no navegador conseguiremos nos conectar ao wordpress</li>
+    <img src="wordpress.png" alt="">
 </ul>
