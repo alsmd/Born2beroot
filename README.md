@@ -136,7 +136,12 @@
     <li>Por razões de segurança tambem esterei fazendo com que o sudo so possa ser usado com uma tty real, ou seja não pode ser executado por um cron por exemplo.</li>
     <li><strong>Defaults requiretty</strong> no <strong>/etc/sudoers</strong></li>
 </ul>
-
+<h2>Cron</h2>
+<ul>
+    <li>Podemo utilizar o <a href="https://opensource.com/article/17/11/how-use-cron-linux" target="_blank" rel="noopener noreferrer">cron</a> quando precisamos que alguma tarefa seja executada a cada periodo de tempo.</li>
+    <li>O serviço cron utiliza os seguintes arquivos : <strong>/var/spool/cron/*</strong>, <strong>/etc/cron.d/*</strong>, <strong>/etc/anacrontab</strong></li>
+    <li>Podemos criar um novo cron utilizando <strong>crontab -e</strong></li>
+</ul>
 <h2>Wordpress</h2>
 <ul>
     <li>Agora é gora de montar nosso primeiro serviço do nosso servidor.</li>
