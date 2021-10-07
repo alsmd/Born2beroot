@@ -6,14 +6,14 @@
 <h2>Instalação</h2>
 <ul>
     <li>Para o projeto eu optei pelo Debian por ser mais simples.</li>
-    <li>Podemos fazer o download do nosso systema em <a target="_blank" href="https://www.debian.org/distrib/netinst">Debian</a>.</li>
-    <li>Irei estar utilizar o <a target="_blank" href="https://www.virtualbox.org/">Virtual box</a> para instalar nosso systema.</li>
+    <li>Podemos fazer o download do nosso sistema em <a target="_blank" href="https://www.debian.org/distrib/netinst">Debian</a>.</li>
+    <li>Irei estar utilizar o <a target="_blank" href="https://www.virtualbox.org/">Virtual box</a> para instalar nosso sistema.</li>
     <li>Agora basta <a href="https://tecnoblog.net/302459/como-criar-uma-maquina-virtual-virtualbox/" target="_blank" rel="noopener noreferrer">Criar</a> uma nova maquina virtual</li>
     <li>Antes de iniciar nossa nova maquina precisamos mudar a configuração de rede do virtual box para <strong>Placa em Modo Bridge</strong>.</li>
     <img src="conf.png" alt="">
     <li>Ao ligar nossa VM podemos selecionar nossa <strong>Debian Iso </strong> para instalação.</li>
     <li>É importante que selecionemos a instalação sem a interface grafica.</li>
-    <li>A primeira parte da instalação é bastante simples, basta selecionar a linguagem e a localização,hostname (login da intra + 42), senha do root e usuario inicial.</li>
+    <li>A primeira parte da instalação é bastante simples, basta selecionar a linguagem, localização,hostname (login da intra + 42), senha do root e usuario inicial.</li>
     <li>Depois das configurações basicas iremos definir como nossas partições serão organizadas.</li>
     <li>Basta selecionar a opção para setar o lvm encriptado automaticamente.</li>
     <li>Iremos criar algumas pastas em partições separadas.</li>
@@ -217,4 +217,18 @@
     <img src="wordpress.png" alt="">
     <li>Agora basta conectar o database ao wordpress e nosso site estara pronto:</li>
     <img src="conf_data.png" alt="">
+</ul>
+
+<h2>Ngrok</h2>
+<ul>
+    <li>Como serviço extra estarei utilizando <a href="https://www.huntress.com/blog/abusing-ngrok-hackers-at-the-end-of-the-tunnel">Ngrok</a></li>
+    <li>Com ele podemos expor alguma porta local para a internet, dessa forma compartilhando nosso site sem muitas complicações.</li>
+    <li>Primeiro estarei realizando a instalação:</li>
+    <ul>
+        <li><strong>sudo apt install snapd</strong></li>
+        <li><strong>sudo snap install ngrok</strong></li>
+    </ul>
+    <li>Agora podemos executar <strong>/snap/bin/ngrok 80 http</strong> para expor nosso servidor web pra internet</li>
+    <img src="ngrok.gif" alt="">
+    <li>Agora podemos disponibilizar os links fornecidos no <strong>Forwarding</strong> para quem quiser acessar nosso site.</li>
 </ul>
